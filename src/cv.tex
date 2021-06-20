@@ -3,8 +3,9 @@
 \usepackage{url}
 \usepackage[usenames,dvipsnames]{xcolor}
 \usepackage{longtable}
-\usepackage{titlesec}	
+\usepackage{titlesec}
 \usepackage{hyperref}
+\input{forkMe.tex}
 
 \definecolor{linkcolour}{rgb}{0,0.2,0.6}
 \hypersetup{colorlinks,breaklinks,urlcolor=linkcolour, linkcolor=linkcolour}
@@ -13,19 +14,21 @@
 \titlespacing{\section}{0pt}{20pt}{2pt}
 
 \begin{document}
-\pagestyle{empty}
+    \pagestyle{empty}
+    \forkme{https://github.com/apprme/cv}
 
-\par{\centering{\Huge{\textsc{Pavel Kakolin}}\bigskip\par}}
-\par{\centering{\Large{\textsc{Software Developer}}\bigskip\par}}
+    \centering{
+        \Huge{\textsc{Pavel Kakolin}}\par
+        \Large{\textsc{Software Developer}}\bigskip\par
+    }
 
-\section{Personal Data}
-\begin{tabular}{rl}
-    \textsc{Place and Date of Birth:} & Russia | Dec 1988 \\
-    \textsc{Address:} & Schinkelstra{\ss}e 26\\
-    & 80805 Munich \\
-    & Germany \\
-    \textsc{Phone:} & +49 1525 62 999 31\\
-    \textsc{email:} & \href{mailto:pavel.kakolin@gmail.com}{pavel.kakolin@gmail.com}
-\end{tabular}
-
+    \section{Personal Data}
+    \begin{tabular}{rl}
+        \textsc{Place and Date of Birth:} & Russia | Dec 1988                                              \\
+        \textsc{Address:}                 & Schinkelstra{\ss}e 26                                          \\
+		                                  & 80805 Munich                                                   \\
+                                          & Germany                                                        \\
+        \textsc{Phone:}                   & +49 1525 62 999 31                                             \\
+        \textsc{email:}                   & \href{mailto:pavel.kakolin@gmail.com}{pavel.kakolin@gmail.com}
+    \end{tabular}
 \end{document}

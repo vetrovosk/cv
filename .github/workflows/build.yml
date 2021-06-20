@@ -16,12 +16,12 @@ jobs:
           sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main" && \
           sudo apt-get update && sudo apt-get install -y terraform
       - name: Compile PDF with pdflatex
-        run: pdflatex ./src/cv.tex
+        run: cd src && pdflatex cv.tex
       - name: Upload PDF to artifact storage
         uses: actions/upload-artifact@v2
         with:
           name: cv.pdf
-          path: cv.pdf
+          path: src/cv.pdf
           retention-days: 5
       - name: Deploy PDF to AWS S3
         env:
@@ -30,4 +30,4 @@ jobs:
         run: |
           cd terraform/prod/ && \
           terraform init -no-color -input=false && \
-          terraform apply -no-color -input=false -auto-approve -var="input_path=../../cv.pdf" -var="input_name=cv.pdf"
+          terraform apply -no-color -input=false -auto-approve -var="input_path=../../src/cv.pdf" -var="input_name=cv.pdf"
