@@ -1,0 +1,20 @@
+name: build
+on: [ push ]
+
+jobs:
+  pdflatex:
+    runs-on: ubuntu-latest
+    name: Compile PDF with pdflatex
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install texlive
+        run: sudo apt-get update && sudo apt-get install -y texlive texlive-formats-extra
+      - name: Compile PDF with pdflatex
+        run: pdflatex ./src/cv.tex
+      - name: Upload PDF to artifact storage
+        uses: actions/upload-artifact@v2
+        with:
+          name: cv.pdf
+          path: cv.pdf
+          retention-days: 5
