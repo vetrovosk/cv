@@ -49,6 +49,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   enabled             = true
   is_ipv6_enabled     = true
   comment             = "Created by terraform"
+  default_root_object = var.root_object.name
 
   aliases = [var.domain_name]
 
@@ -74,9 +75,9 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 
   viewer_certificate {
     cloudfront_default_certificate = false
-    acm_certificate_arn = var.certificate_arn
-    minimum_protocol_version = "TLSv1.2_2019"
-    ssl_support_method = "sni-only"
+    acm_certificate_arn            = var.certificate_arn
+    minimum_protocol_version       = "TLSv1.2_2019"
+    ssl_support_method             = "sni-only"
   }
 
   restrictions {
@@ -102,4 +103,13 @@ resource "aws_route53_record" "a" {
     zone_id                = aws_cloudfront_distribution.s3_distribution.hosted_zone_id
     evaluate_target_health = false
   }
+}
+
+resource "aws_s3_bucket_object" "object" {
+  bucket              = aws_s3_bucket.public.id
+  key                 = var.root_object.name
+  source              = var.root_object.source
+  etag                = filemd5(var.root_object.source)
+  content_type        = var.root_object.type
+  content_disposition = var.root_object.disposition
 }

@@ -8,8 +8,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Install texlive
-        run: sudo apt-get update && sudo apt-get install -y texlive texlive-formats-extra
+      - name: Install texlive and terraform
+        run: |
+          sudo apt-get update && \
+          sudo apt-get install -y texlive texlive-formats-extra gnupg software-properties-common curl && \
+          curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - && \
+          sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main" && \
+          sudo apt-get update && sudo apt-get install -y terraform
       - name: Compile PDF with pdflatex
         run: pdflatex ./src/cv.tex
       - name: Upload PDF to artifact storage
@@ -18,3 +23,11 @@ jobs:
           name: cv.pdf
           path: cv.pdf
           retention-days: 5
+      - name: Deploy PDF to AWS S3
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          cd terraform/prod/ && \
+          terraform init -no-color -input=false && \
+          terraform apply -no-color -input=false -auto-approve -var="input_path=../../cv.pdf" -var="input_name=cv.pdf"

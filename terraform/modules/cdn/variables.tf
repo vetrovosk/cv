@@ -12,3 +12,12 @@ variable "certificate_arn" {
   description = "ARN of SSL certificate"
   type        = string
 }
+
+variable "root_object" {
+  type = object({
+    name        = string
+    source      = string
+    type        = string
+    disposition = string
+  })
+}
