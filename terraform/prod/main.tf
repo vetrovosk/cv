@@ -33,10 +33,6 @@ module "cdn" {
   domain_name     = "cv.appr.me"
   zone            = "appr.me"
 
-  root_object = {
-    name        = var.input_name
-    source      = abspath(var.input_path)
-    type        = "application/pdf"
-    disposition = "inline; filename=\"${var.input_name}\""
-  }
+  source_dir = abspath(var.source_dir)
+  root_object = var.root_object_name
 }

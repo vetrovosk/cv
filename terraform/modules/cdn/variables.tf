@@ -14,10 +14,11 @@ variable "certificate_arn" {
 }
 
 variable "root_object" {
-  type = object({
-    name        = string
-    source      = string
-    type        = string
-    disposition = string
-  })
+  description = "Name of the index file"
+  type = string
+}
+
+variable "source_dir" {
+  description = "Path to directory to sync to S3"
+  type        = string
 }

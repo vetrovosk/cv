@@ -10,6 +10,8 @@
     pdfsubject={Pavel Kakolin, CV}
 ]{hyperref}
 \input{forkMe.tex}
+\input{coursera.tex}
+\input{education.tex}
 
 \definecolor{linkcolour}{rgb}{0,0.2,0.6}
 \hypersetup{colorlinks,breaklinks,urlcolor=linkcolour, linkcolor=linkcolour}
@@ -28,11 +30,25 @@
 
     \section{Personal Data}
     \begin{tabular}{rl}
-        \textsc{Place and Date of Birth:} & Russia | Dec 1988                                              \\
-        \textsc{Address:}                 & Schinkelstra{\ss}e 26                                          \\
-                                          & 80805 Munich                                                   \\
-                                          & Germany                                                        \\
-        \textsc{Phone:}                   & +49 1525 62 999 31                                             \\
-        \textsc{email:}                   & \href{mailto:pavel.kakolin@gmail.com}{pavel.kakolin@gmail.com}
+        \textsc{Place and Date of Birth} & Russia | Dec 1988                                              \\
+        \textsc{Address}                 & Schinkelstra{\ss}e 26                                          \\
+                                         & 80805 Munich                                                   \\
+                                         & Germany                                                        \\
+        \textsc{Phone}                   & +49 1525 62 999 31                                             \\
+        \textsc{Email}                   & \href{mailto:pavel.kakolin@gmail.com}{pavel.kakolin@gmail.com}
+    \end{tabular}
+
+    \newpage
+
+    \section{Education}
+    \begin{tabular}{r|p{11cm}}
+        \education{2021}{Coursera} {
+            \specialization{NB4Z5Z8YDEU6}{Google Project Management: Specialization}\\&
+            \course{HW4YDXKGK6XU}{How to Manage a Remote Team}\\&
+            \course{BK8E35DRWSZ7}{Apache Spark (TM) SQL for Data Analyst}
+        }
+        \education{2006 --- 2011}{Saint Petersburg State University, Russia} {
+            \href{https://cv.appr.me/diploma.pdf}{Specialist's degree in \emph{Mathematics and Computer Science}}
+        }
     \end{tabular}
 \end{document}

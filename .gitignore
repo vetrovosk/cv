@@ -4,5 +4,5 @@
 *.log
 *.out
 *.gz
-*.pdf
+src/*.pdf
 .DS_Store

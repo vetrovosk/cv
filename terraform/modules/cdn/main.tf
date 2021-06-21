@@ -49,7 +49,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   enabled             = true
   is_ipv6_enabled     = true
   comment             = "Created by terraform"
-  default_root_object = var.root_object.name
+  default_root_object = var.root_object
 
   aliases = [var.domain_name]
 
@@ -105,11 +105,17 @@ resource "aws_route53_record" "a" {
   }
 }
 
+locals {
+  pdf = "^.*(\\.pdf)$"
+}
+
 resource "aws_s3_bucket_object" "object" {
+  for_each = fileset(var.source_dir, "*")
+
   bucket              = aws_s3_bucket.public.id
-  key                 = var.root_object.name
-  source              = var.root_object.source
-  etag                = filemd5(var.root_object.source)
-  content_type        = var.root_object.type
-  content_disposition = var.root_object.disposition
+  key                 = each.value
+  source              = "${var.source_dir}/${each.value}"
+  etag                = filemd5("${var.source_dir}/${each.value}")
+  content_type        = contains(regex(local.pdf, each.value), ".pdf") ? "application/pdf" : null
+  content_disposition = contains(regex(local.pdf, each.value), ".pdf") ? "inline; filename=\"${each.value}\"" : null
 }

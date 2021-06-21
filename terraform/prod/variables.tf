@@ -1,9 +1,9 @@
-variable "input_path" {
-  description = "Path to the index file"
+variable "source_dir" {
+  description = "Path to directory to sync to S3"
   type        = string
 }
 
-variable "input_name" {
+variable "root_object_name" {
   description = "Name of the index file"
   type        = string
 }

@@ -11,23 +11,23 @@ jobs:
       - name: Install texlive and terraform
         run: |
           sudo apt-get update && \
-          sudo apt-get install -y texlive texlive-formats-extra gnupg software-properties-common curl && \
+          sudo apt-get install -y texlive texlive-formats-extra latexmk gnupg software-properties-common curl && \
           curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - && \
           sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main" && \
           sudo apt-get update && sudo apt-get install -y terraform
       - name: Compile PDF with pdflatex
-        run: cd src && pdflatex cv.tex
+        run: cd src && pdflatex -output-director=../assets/ cv.tex && latexmk -c -outdir=../assets/
       - name: Upload PDF to artifact storage
         uses: actions/upload-artifact@v2
         with:
           name: cv.pdf
-          path: src/cv.pdf
+          path: assets/cv.pdf
           retention-days: 5
-      - name: Deploy PDF to AWS S3
+      - name: Deploy assets to AWS S3
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           cd terraform/prod/ && \
           terraform init -no-color -input=false && \
-          terraform apply -no-color -input=false -auto-approve -var="input_path=../../src/cv.pdf" -var="input_name=cv.pdf"
+          terraform apply -no-color -input=false -auto-approve -var="source_dir=../../assets/" -var="root_object_name=cv.pdf"
