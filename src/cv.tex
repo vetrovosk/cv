@@ -9,9 +9,10 @@
     pdftitle={Pavel Kakolin, CV},
     pdfsubject={Pavel Kakolin, CV}
 ]{hyperref}
-\input{forkMe.tex}
+\input{github.tex}
 \input{coursera.tex}
 \input{education.tex}
+\input{experience.tex}
 
 \definecolor{linkcolour}{rgb}{0,0.2,0.6}
 \hypersetup{colorlinks,breaklinks,urlcolor=linkcolour, linkcolor=linkcolour}
@@ -21,7 +22,7 @@
 
 \begin{document}
     \pagestyle{empty}
-    \forkme{https://github.com/apprme/cv}
+    \github{https://github.com/apprme/cv}
 
     \centering{
         \Huge{\textsc{Pavel Kakolin}}\par
@@ -30,12 +31,48 @@
 
     \section{Personal Data}
     \begin{tabular}{rl}
-        \textsc{Place and Date of Birth} & Russia | Dec 1988                                              \\
-        \textsc{Address}                 & Schinkelstra{\ss}e 26                                          \\
-                                         & 80805 Munich                                                   \\
-                                         & Germany                                                        \\
-        \textsc{Phone}                   & +49 1525 62 999 31                                             \\
-        \textsc{Email}                   & \href{mailto:pavel.kakolin@gmail.com}{pavel.kakolin@gmail.com}
+        \textsc{Phone}   & \href{tel:+49-1525-62-999-31}{+49 1525 62 999 31}              \\
+        \textsc{Email}   & \href{mailto:pavel.kakolin@gmail.com}{pavel.kakolin@gmail.com} \\
+        \textsc{Address} & Schinkelstra{\ss}e 26                                          \\
+                         & 80805 Munich                                                   \\
+                         & Germany                                                        \\
+    \end{tabular}
+
+    \section{Work Experience}
+    \begin{tabular}{r|p{11cm}}
+        \experience{Mar 2013 --- present}{Delightex GmbH, Munich \href{https://delightex.com}{delightex.com}}{Software Developer} {
+            Was responsible for refactoring of legacy monolithic server into scalable distributed cloud-native application,
+            utilizing containerized microservices, serverless functions, and immutable infrastructure described in
+            declarative code (\mbox{Kotlin}, \mbox{Java}, \mbox{Ansible}, \mbox{Terraform}).
+
+            Implemented continuous integration and deployment of the application into AWS
+            and mobile app stores (App Store, Play Store) using \mbox{TeamCity}, \mbox{Ansible}, \mbox{Terraform},
+            \mbox{fastlane}.
+
+            Employed appropriate AWS solutions to improve the availability and scalability of the application backend:
+            \mbox{ELB}, \mbox{ECS} (\mbox{Fargate} and \mbox{EC2}), \mbox{Lambda}, \mbox{RDS} for \mbox{MySQL} and \mbox{PostgreSQL},
+            \mbox{DynamoDB}, \mbox{ElastiCache} for \mbox{Redis}, \mbox{S3}, \mbox{CloudFront}, \mbox{Route 53}.
+
+            Set up log processing, automated monitoring, and alerting using \mbox{AWS CloudWatch},
+            \mbox{Kinesis Data Firehose}, \mbox{Lambda}, \mbox{S3}, \mbox{Amazon Elasticsearch Service}, Kibana,
+            \mbox{SNS}, \mbox{SQS}, \mbox{StatusCake}, \mbox{Opsgenie}.
+
+            Implemented clients to numerous third-party APIs: Stripe, \mbox{Google Sign-In}, \mbox{Azure AD}, Azure Cognitive Services,
+            and many others.
+
+            Participated in code reviews and 24/7 on-call rotations.
+        }
+        \experience{Sep 2011 --- Mar 2013}{i-Free, St. Petersburg, Russia \href{https://i-free.com/ }{i-free.com}}{Software Developer} {
+            Developed an SMS payment processing solution and microservice architecture backend for numerous mobile
+            applications and internet sites (Node.js, Redis, MySQL, protobuf).
+        }
+        \experience{Sep 2011 --- Mar 2013}{RealWeb, St. Petersburg, Russia \href{https://realweb.ru/}{realweb.ru}}{Software Developer} {
+            Worked on AdHands --- a tool used internally and by several third-parties for managing, serving, and analyzing
+            the performance of internet ads (PHP, Zend Framework, MySQL, XSLT).
+        }
+        \experience{Aug 2009 --- Aug 2010}{Info-Lan, St. Petersburg, Russia \href{https://info-lan.ru}{info-lan.ru}}{Software Developer} {
+            Developed a billing tool and a monitoring tool utilizing SNMP to collect metrics from various network devices (PHP, XSLT).
+        }
     \end{tabular}
 
     \newpage
@@ -50,5 +87,12 @@
         \education{2006 --- 2011}{Saint Petersburg State University, Russia} {
             \href{https://cv.appr.me/diploma.pdf}{Specialist's degree in \emph{Mathematics and Computer Science}}
         }
+    \end{tabular}
+
+    \section{Languages}
+    \flushleft
+    \begin{tabular}{ll}
+        \textsc{English:}&advanced\\
+        \textsc{Russian:}&native
     \end{tabular}
 \end{document}
