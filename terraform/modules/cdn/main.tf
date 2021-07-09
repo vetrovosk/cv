@@ -119,3 +119,19 @@ resource "aws_s3_bucket_object" "object" {
   content_type        = contains(regex(local.pdf, each.value), ".pdf") ? "application/pdf" : null
   content_disposition = contains(regex(local.pdf, each.value), ".pdf") ? "inline; filename=\"${each.value}\"" : null
 }
+
+locals {
+  etags = sort(tolist([
+    for object in aws_s3_bucket_object.object : object.etag
+  ]))
+}
+
+resource "null_resource" "create-invalidation" {
+  provisioner "local-exec" {
+    command = "aws cloudfront create-invalidation --region us-east-1 --distribution-id ${aws_cloudfront_distribution.s3_distribution.id} --paths '/' '/*'"
+  }
+
+  triggers = {
+    etags = join(",", local.etags)
+  }
+}
