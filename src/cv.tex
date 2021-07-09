@@ -5,13 +5,12 @@
 \usepackage{url}
 \usepackage[usenames,dvipsnames]{xcolor}
 \usepackage{longtable}
-\usepackage{titlesec}
+\usepackage{titlesec,adjustbox}
 \usepackage[pdftex,
     pdfauthor={Pavel Kakolin},
     pdftitle={Pavel Kakolin, CV},
     pdfsubject={Pavel Kakolin, CV}
 ]{hyperref}
-\input{github.tex}
 \input{coursera.tex}
 \input{education.tex}
 \input{experience.tex}
@@ -24,7 +23,6 @@
 
 \begin{document}
     \pagestyle{empty}
-    \github{https://github.com/apprme/cv}
 
     \centering{
         \Huge{\textsc{Pavel Kakolin}}\par
@@ -96,5 +94,16 @@
     \begin{tabular}{ll}
         \textsc{English:}&advanced\\
         \textsc{Russian:}&native
+    \end{tabular}
+
+    \section{Miscellaneous}
+    \begin{tabular}{p\textwidth}
+        \setlength{\parskip}{1em}
+        Source code of this CV is hosted on GitHub at \href{https://github.com/apprme/cv}{github.com/apprme/cv}.
+        The latest version of this CV is available at \href{https://cv.appr.me}{cv.appr.me}.
+
+        It is automatically built from the \LaTeX\ document and deployed to AWS Cloud using \mbox{GitHub Actions}.
+        All the infrastructure behind \href{https://cv.appr.me}{cv.appr.me}, including SSL certificate,
+        S3 bucket, \mbox{CloudFront} distribution and DNS records, is created using Terraform.
     \end{tabular}
 \end{document}
