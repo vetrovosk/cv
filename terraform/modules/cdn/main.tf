@@ -119,14 +119,14 @@ locals {
 }
 
 resource "aws_s3_bucket_object" "object" {
-  for_each = fileset(var.source_dir, "*")
+  for_each = fileset(var.source_dir, "**")
 
   bucket              = aws_s3_bucket.public.id
   key                 = each.value
   source              = "${var.source_dir}/${each.value}"
   etag                = filemd5("${var.source_dir}/${each.value}")
   content_type        = contains(regex(local.pdf, each.value), ".pdf") ? "application/pdf" : null
-  content_disposition = contains(regex(local.pdf, each.value), ".pdf") ? "inline; filename=\"${each.value}\"" : null
+  content_disposition = contains(regex(local.pdf, each.value), ".pdf") ? "inline; filename=\"${basename(each.value)}\"" : null
 }
 
 locals {
